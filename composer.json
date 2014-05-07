@@ -1,0 +1,27 @@
+{
+  "name": "qiuxiang/webot",
+  "description": "wechat robot",
+  "keywords": ["wechat"],
+  "homepage": "http://github.com/qiuxiang/webot",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Qiu Xiang",
+      "email": "xiang.qiu@qq.com",
+      "homepage": "http://github.com/qiuxiang"
+    }
+  ],
+  "require": {
+    "symfony/yaml": "2.4.*",
+    "qiuxiang/wechat": "0.0.*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.1.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Webot\\": "src"
+    }
+  }
+}

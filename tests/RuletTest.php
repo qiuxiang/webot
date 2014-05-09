@@ -1,13 +1,11 @@
 <?php
 
-use Webot\Rule;
-
 class RuleTest extends PHPUnit_Framework_TestCase {
   public function testAdd() {
-    $rule = new Rule;
+    $rule = new Webot_Rules;
 
-    $rule->add(array('p1' => 'h1', 'p2' => 'h2'));
-    $rule->add(array('p3' => 'h3'));
+    $rule->merge(array('p1' => 'h1', 'p2' => 'h2'));
+    $rule->add('p3', 'h3');
 
     $this->assertAdded(array(
       'p1' => 'h1', 'p2' => 'h2', 'p3' => 'h3'), $rule);
@@ -24,16 +22,24 @@ class RuleTest extends PHPUnit_Framework_TestCase {
       'yb1' => 'hb1',
       'ja1' => 'ha1',
       'jb1' => 'hb1',
+      'p1' => 'h1',
+      'p2' => array(
+        'news' => array(
+          'title' => 'hello',
+          'content' => 'world',
+        ),
+      ),
     );
 
-    $rule = new Rule;
+    $rule = new Webot_Rules;
     $rule->loadYaml(__DIR__ . '/fixtures/rule/rules.yml');
     $rule->loadYaml(__DIR__ . '/fixtures/rule/yaml/*.yml');
     $rule->loadJson(__DIR__ . '/fixtures/rule/rules.json');
     $rule->loadJson(__DIR__ . '/fixtures/rule/json/*.json');
+    $rule->loadPhp(__DIR__ . '/fixtures/rule/rules.php');
     $this->assertAdded($rules, $rule);
 
-    $rule = new Rule;
+    $rule = new Webot_Rules;
     $rule->loadYaml(array(
       __DIR__ . '/fixtures/rule/rules.yml',
       __DIR__ . '/fixtures/rule/yaml/a.yml',
@@ -44,14 +50,17 @@ class RuleTest extends PHPUnit_Framework_TestCase {
       __DIR__ . '/fixtures/rule/json/a.json',
       __DIR__ . '/fixtures/rule/json/b.json',
     ));
+    $rule->loadPhp(array(
+      __DIR__ . '/fixtures/rule/rules.php',
+    ));
     $this->assertAdded($rules, $rule);
   }
 
   /**
    * @param array $expected
-   * @param Rule $rule
+   * @param Webot_Rules $rule
    */
-  private function assertAdded($expected, $rule) {
+  public function assertAdded($expected, $rule) {
     $rules = array();
 
     foreach ($rule as $pattern => $handler) {

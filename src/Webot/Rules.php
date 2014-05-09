@@ -1,14 +1,12 @@
-<?php namespace Webot;
+<?php
 
-use ArrayIterator;
-use IteratorAggregate;
 use Symfony\Component\Yaml\Yaml;
 
-class Rule implements IteratorAggregate {
+class Webot_Rules implements IteratorAggregate {
   /**
    * @var array
    */
-  protected $rules = array();
+  public $rules = array();
 
   /**
    * @return ArrayIterator
@@ -18,10 +16,25 @@ class Rule implements IteratorAggregate {
   }
 
   /**
+   * @param string $pattern
+   * @param callable|string $handler
+   */
+  public function add($pattern, $handler) {
+    $this->rules[$pattern] = $handler;
+  }
+
+  /**
    * @param array $rules array(pattern => handler)
    */
-  public function add($rules) {
+  public function merge($rules) {
     $this->rules = array_merge($this->rules, $rules);
+  }
+
+  /**
+   * @param string|array $files
+   */
+  public function loadPhp($files) {
+    $this->loadFiles($files, 'php');
   }
 
   /**
@@ -42,7 +55,14 @@ class Rule implements IteratorAggregate {
    * @param string $file
    * @return array
    */
-  protected function readYaml($file) {
+  public function readPhp($file) {
+    return include $file;
+  }
+  /**
+   * @param string $file
+   * @return array
+   */
+  public function readYaml($file) {
     return Yaml::parse($file);
   }
 
@@ -50,7 +70,7 @@ class Rule implements IteratorAggregate {
    * @param string $file
    * @return array
    */
-  protected function readJson($file) {
+  public function readJson($file) {
     return json_decode(file_get_contents($file), true);
   }
 
@@ -60,7 +80,7 @@ class Rule implements IteratorAggregate {
    */
   public function loadFile($files, $type) {
     foreach (glob($files) as $file) {
-      $this->add($this->{'read' . ucfirst($type)}($file));
+      $this->merge($this->{'read' . ucfirst($type)}($file));
     }
   }
 

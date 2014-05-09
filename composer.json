@@ -20,8 +20,8 @@
     "phpunit/phpunit": "4.1.*"
   },
   "autoload": {
-    "psr-4": {
-      "Webot\\": "src"
+    "psr-0": {
+      "Webot": "src"
     }
   }
 }

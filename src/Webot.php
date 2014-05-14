@@ -1,12 +1,12 @@
-<?php
+<?php namespace Wechat;
 
 class Webot {
   /**
    * @param string $token
    */
   public function __construct($token='') {
-    $this->rules = new Webot_Rules;
-    $this->menus = new Webot_Rules;
+    $this->rules = new Webot\Rules;
+    $this->menus = new Webot\Rules;
     $this->wechat = new Wechat($token);
   }
 

@@ -14,14 +14,14 @@
   ],
   "require": {
     "symfony/yaml": "2.4.*",
-    "qiuxiang/wechat": "0.0.*"
+    "qiuxiang/wechat": "0.1.*"
   },
   "require-dev": {
     "phpunit/phpunit": "4.1.*"
   },
   "autoload": {
-    "psr-0": {
-      "Webot": "src"
+    "psr-4": {
+      "Wechat\\": "src"
     }
   }
 }

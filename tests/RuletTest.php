@@ -2,7 +2,7 @@
 
 class RuleTest extends PHPUnit_Framework_TestCase {
   public function testAdd() {
-    $rule = new Webot_Rules;
+    $rule = new Wechat\Webot\Rules;
 
     $rule->merge(array('p1' => 'h1', 'p2' => 'h2'));
     $rule->add('p3', 'h3');
@@ -31,7 +31,7 @@ class RuleTest extends PHPUnit_Framework_TestCase {
       ),
     );
 
-    $rule = new Webot_Rules;
+    $rule = new Wechat\Webot\Rules;
     $rule->loadYaml(__DIR__ . '/fixtures/rule/rules.yml');
     $rule->loadYaml(__DIR__ . '/fixtures/rule/yaml/*.yml');
     $rule->loadJson(__DIR__ . '/fixtures/rule/rules.json');
@@ -39,7 +39,7 @@ class RuleTest extends PHPUnit_Framework_TestCase {
     $rule->loadPhp(__DIR__ . '/fixtures/rule/rules.php');
     $this->assertAdded($rules, $rule);
 
-    $rule = new Webot_Rules;
+    $rule = new Wechat\Webot\Rules;
     $rule->loadYaml(array(
       __DIR__ . '/fixtures/rule/rules.yml',
       __DIR__ . '/fixtures/rule/yaml/a.yml',
@@ -58,7 +58,7 @@ class RuleTest extends PHPUnit_Framework_TestCase {
 
   /**
    * @param array $expected
-   * @param Webot_Rules $rule
+   * @param Wechat\Webot\Rules $rule
    */
   public function assertAdded($expected, $rule) {
     $rules = array();

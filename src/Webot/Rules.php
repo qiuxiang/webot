@@ -1,8 +1,10 @@
-<?php
+<?php namespace Wechat\Webot;
 
 use Symfony\Component\Yaml\Yaml;
+use IteratorAggregate;
+use ArrayIterator;
 
-class Webot_Rules implements IteratorAggregate {
+class Rules implements IteratorAggregate {
   /**
    * @var array
    */

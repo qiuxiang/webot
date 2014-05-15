@@ -7,6 +7,6 @@ class WebotTest extends Wechat\TestCase {
   public $token = 'token';
 
   public function testConstructor() {
-    print_r($this->send('text', 'hello'));
+    print_r($this->send('text', 'hello')->raw());
   }
 }

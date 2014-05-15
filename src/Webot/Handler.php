@@ -25,7 +25,7 @@ class Handler {
     }
 
     if (is_callable($handler)) {
-      $handler = $handler($params);
+      $handler = call_user_func_array($handler, $params);
     }
 
     $type = 'text';

@@ -3,7 +3,7 @@
 use Wechat\Request;
 use Wechat\Response;
 
-class Hook {
+class Hooks {
   /**
    * @var array
    */

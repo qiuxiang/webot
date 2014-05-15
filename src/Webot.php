@@ -26,7 +26,7 @@ class Webot {
   public $handler;
 
   /**
-   * @var Webot\Hook
+   * @var Webot\Hooks
    */
   public $hook;
 
@@ -50,7 +50,7 @@ class Webot {
     $this->request = $this->wechat->request;
     $this->response = $this->wechat->response;
     $this->handler = new Webot\Handler($this->wechat);
-    $this->hook = new Webot\Hook($this->request, $this->response);
+    $this->hook = new Webot\Hooks($this->request, $this->response);
     $this->hook->dispatch('init');
   }
 

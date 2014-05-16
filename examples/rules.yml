@@ -1,0 +1,13 @@
+y1: h1
+y2:
+  news:
+    title: 标题1
+    content: |
+      hello
+      world
+    picture: http://photos.tuchong.com/39472/f/6831685.jpg
+    url: http://cdplayer33.tuchong.com/6382856/6831685
+y3:
+  - a
+  - b
+  - c

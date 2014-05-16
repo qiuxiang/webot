@@ -21,7 +21,7 @@ class Handler {
    */
   public function execute($handler, $params=array()) {
     if (is_array($handler) && isset($handler[0])) {
-      $handler = array_rand($handler);
+      $handler = $handler[array_rand($handler)];
     }
 
     if (is_callable($handler)) {

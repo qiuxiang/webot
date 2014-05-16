@@ -1,0 +1,22 @@
+{
+  "j1": "h1",
+  "j2": {
+    "news": [
+      {
+        "title": "Heartbleed 心脏出血",
+        "picture": "http://www.vaikan.com/wordpress/wp-content/uploads/2014/04/Heartbleed_Nightmare-560x345.jpg",
+        "url": "http://www.vaikan.com/heartbleed/"
+      },
+      {
+        "title": "蹲在马桶上编程",
+        "picture": "http://www.vaikan.com/wordpress/wp-content/uploads/2014/04/hackers-have-figured-out-ho-560x345.jpg",
+        "url": "http://www.vaikan.com/programming-on-toilet/"
+      },
+      {
+        "title": "现实生活中的Linux",
+        "picture": "http://www.vaikan.com/wordpress/wp-content/uploads/2014/03/Linux_Spotted_real_life-560x345.jpg",
+        "url": "http://www.vaikan.com/linux-fun-linux-spotted-in-real-life/"
+      }
+    ]
+  }
+}

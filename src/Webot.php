@@ -23,22 +23,12 @@ class Webot {
   /**
    * @var Webot\Handler
    */
-  public $handler;
+  private $handler;
 
   /**
    * @var Webot\Hooks
    */
-  public $hook;
-
-  /**
-   * @var Request
-   */
-  public $request;
-
-  /**
-   * @var Response
-   */
-  public $response;
+  private $hook;
 
   /**
    * @param string $token
@@ -47,10 +37,11 @@ class Webot {
     $this->rules = new Webot\Rules;
     $this->menus = new Webot\Rules;
     $this->wechat = new Wechat($token);
-    $this->request = $this->wechat->request;
-    $this->response = $this->wechat->response;
     $this->handler = new Webot\Handler($this->wechat);
-    $this->hook = new Webot\Hooks($this->request, $this->response);
+    $this->hook = new Webot\Hooks([
+      'request' => $this->wechat->request,
+      'response' => $this->wechat->response,
+    ]);
     $this->hook->dispatch('init');
   }
 

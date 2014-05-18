@@ -1,8 +1,5 @@
 <?php namespace Wechat\Webot;
 
-use Wechat\Request;
-use Wechat\Response;
-
 class Hooks {
   /**
    * @var array
@@ -10,22 +7,15 @@ class Hooks {
   private $hooks;
 
   /**
-   * @var Request
+   * @var array
    */
-  private $request;
+  private $depends;
 
   /**
-   * @var Response
+   * @param array $depends
    */
-  private $response;
-
-  /**
-   * @param Request $request
-   * @param Response $response
-   */
-  public function __construct($request, $response) {
-    $this->request = $request;
-    $this->response = $response;
+  public function __construct($depends) {
+    $this->depends = $depends;
   }
 
   /**
@@ -42,7 +32,7 @@ class Hooks {
   public function dispatch($hook) {
     if (isset($this->hooks[$hook])) {
       foreach ($this->hooks[$hook] as $callback) {
-        call_user_func($callback, $this->request, $this->response);
+        $callback($this->depends);
       }
     }
   }

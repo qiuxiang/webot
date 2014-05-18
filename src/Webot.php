@@ -52,6 +52,10 @@ class Webot {
         $this->handler->matchs($this->rules);
         break;
 
+      case 'image':
+        $this->hook->dispatch('image');
+        break;
+
       case 'event':
         switch ($this->wechat->request->event) {
           case 'subscribe':
@@ -64,12 +68,12 @@ class Webot {
             break;
 
           default:
-            $this->hook->dispatch('event.unknown');
+            $this->hook->dispatch('unknown.event');
         }
         break;
 
       default:
-        $this->hook->dispatch('message.unknown');
+        $this->hook->dispatch('unknown.message');
     }
 
     $this->hook->dispatch('end');

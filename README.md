@@ -17,8 +17,8 @@ $webot->rules->add('(c|course).*(\d+)', 'some course');
 $webot->rules->add('rand', ['1', '2', '3']);
 
 // 订阅事件处理
-$webot->on('event.subscribe', function ($request, $response) {
-  $response('text', 'welcome');
+$webot->on('event.subscribe', function ($depends) {
+  $depends['response']('text', 'welcome');
 });
 
 $webot->run();
@@ -157,22 +157,23 @@ $webot->$menus->loadPhp('menus.php');
 ------
 `on(string $hook, callable $callback)`
 
-$callback 会传入两个参数，第一个参数包含了请求信息，第二个参数用于回复
+$callback 会以数组形式传入依赖，其中包含了请求信息（request），和回复函数（reponse）
 
 支持的事件列表:
 - init - 初始化时运行
-- event - 接收到事件消息时触发
+- event - 收到事件消息
 - event.click - 菜单点击事件
 - event.subscribe - 订阅事件
 - event.unsubscribe - 取消订阅事件
-- text - 接收到文本消息时触发
-- message.unknown - 未知的消息类型
-- event.unknown - 未知的事件类型
+- text - 收到文本消息
+- image - 收到图片消息
+- unknown.message - 未知的消息类型
+- unknown.event - 未知的事件类型
 
 ```php
-$webot->on('event.click', function ($request, $response) {
+$webot->on('event.click', function ($depends) {
   // $request->eventKey 事件代码
   // $request->fromUserName 用户 OpenID
-  $response('text', 'hello');
+  $depends['response']('text', 'hello');
 });
 ```

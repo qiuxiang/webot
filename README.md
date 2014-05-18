@@ -73,8 +73,8 @@ $webot->rules->add('what', function () {
 });
 
 // 当 pattern 为正则表达式时，matchs 会作为函数的参数传入
-$webot->rules->add('(1)+(2)', function ($content, $a, $b) {
-  return $a + $b; // 3
+$webot->rules->add('(1)+(2)', function ($matchs) {
+  return $matchs[1] + $matchs[2]; // 3
 });
 ```
 

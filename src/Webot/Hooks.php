@@ -28,11 +28,12 @@ class Hooks {
 
   /**
    * @param string $hook
+   * @param array $params
    */
-  public function dispatch($hook) {
+  public function dispatch($hook, $params=[]) {
     if (isset($this->hooks[$hook])) {
       foreach ($this->hooks[$hook] as $callback) {
-        $callback($this->depends);
+        $callback(array_merge($this->depends, $params));
       }
     }
   }

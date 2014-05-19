@@ -46,9 +46,11 @@ class Webot {
   }
 
   public function run() {
-    if (!$this->wechat->request->valid()) {
+    if ($this->wechat->token && !$this->wechat->request->valid()) {
       $this->hook->dispatch('request.invalid');
       return;
+    } elseif (isset($_GET['echostr'])) {
+      echo $_GET['echostr'];
     }
 
     switch ($this->wechat->request->msgtype) {

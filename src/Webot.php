@@ -59,6 +59,9 @@ class Webot {
           'content' => $this->wechat->request->content,
         ]);
         $this->handler->matchs($this->rules);
+        $this->hook->dispatch('text.after', [
+          'content' => $this->wechat->request->content,
+        ]);
         break;
 
       case 'image':
@@ -122,6 +125,9 @@ class Webot {
               'eventKey' => $this->wechat->request->eventKey,
             ]);
             $this->handler->equals($this->menus);
+            $this->hook->dispatch('event.click.after', [
+              'eventKey' => $this->wechat->request->eventKey,
+            ]);
             break;
 
           case 'VIEW':

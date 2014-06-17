@@ -55,11 +55,11 @@ class Webot {
 
     switch ($this->wechat->request->msgtype) {
       case 'text':
-        $this->hook->dispatch('text', [
+        $this->hook->dispatch('text.before', [
           'content' => $this->wechat->request->content,
         ]);
         $this->handler->matchs($this->rules);
-        $this->hook->dispatch('text.after', [
+        $this->hook->dispatch('text', [
           'content' => $this->wechat->request->content,
         ]);
         break;
@@ -121,11 +121,11 @@ class Webot {
             break;
 
           case 'CLICK':
-            $this->hook->dispatch('event.click', [
+            $this->hook->dispatch('event.click.before', [
               'eventKey' => $this->wechat->request->eventKey,
             ]);
             $this->handler->equals($this->menus);
-            $this->hook->dispatch('event.click.after', [
+            $this->hook->dispatch('event.click', [
               'eventKey' => $this->wechat->request->eventKey,
             ]);
             break;

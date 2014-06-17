@@ -157,7 +157,7 @@ $webot->$menus->loadPhp('menus.php');
 ------
 `on(string $hook, callable $callback)`
 
-$callback 会以数组形式传入依赖，其中包含了请求信息（request），和回复函数（reponse）
+$callback 会以对象形式传入依赖，其中包含了请求信息（request），和回复函数（reponse）
 
 支持的事件列表:
 - init - 初始化时运行
@@ -174,6 +174,6 @@ $callback 会以数组形式传入依赖，其中包含了请求信息（request
 $webot->on('event.click', function ($depends) {
   // $request->eventKey 事件代码
   // $request->fromUserName 用户 OpenID
-  $depends['response']('text', 'hello');
+  $depends->response->text('hello');
 });
 ```

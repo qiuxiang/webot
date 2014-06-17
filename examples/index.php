@@ -8,6 +8,6 @@ $webot->rules->loadPhp('rules.php');
 $webot->rules->loadYaml('rules.yml');
 $webot->rules->loadJson('rules.json');
 $webot->on('end', function ($depends) {
-  $depends['response']->text('welcome');
+  $depends->response->text('welcome');
 });
 $webot->run();

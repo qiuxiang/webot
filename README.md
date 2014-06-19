@@ -14,11 +14,11 @@ $webot->rules->add('hello', 'world');
 $webot->rules->add('(c|course).*(\d+)', 'some course');
 
 // 如果 handler 是数组，则随机回复一条消息
-$webot->rules->add('rand', ['1', '2', '3']);
+$webot->rules->add('rand', array('1', '2', '3'));
 
 // 订阅事件处理
 $webot->on('event.subscribe', function ($depends) {
-  $depends['response']('text', 'welcome');
+  $depends->response->->text('welcome');
 });
 
 $webot->run();
@@ -31,26 +31,26 @@ $webot->run();
 ### 回复更多形式的消息
 ```php
 // 回复单图文消息
-$webot->rules->add('what', ['news' => [
+$webot->rules->add('what', array('news' => array(
   'title' => '标题',
   'content' => '描述',
   'picture' => 'http://example.com/picture.jpg',
   'url' => 'http://example.com',
-]]);
+)));
 
 // 回复多图文消息
-$webot->rules->add('what', ['news' => [
-  [
+$webot->rules->add('what', array('news' => array(
+  array(
     'title' => '标题1',
     'picture' => 'http://example.com/picture1.jpg',
     'url' => 'http://example.com/1',
-  ],
-  [
+  ),
+  array(
     'title' => '标题2',
     'picture' => 'http://example.com/picture2.jpg',
     'url' => 'http://example.com/2',
-  ],
-]);
+  ),
+));
 ```
 
 ### 使用函数进行处理
@@ -62,14 +62,14 @@ $webot->rules->add('hello', function () {
 
 // 回复图文消息
 $webot->rules->add('what', function () {
-  return [
-    'news' => [
+  return array(
+    'news' => array(
       'title' => '标题',
       'content' => '描述',
       'picture' => 'http://example.com/picture.jpg',
       'url' => 'http://example.com',
-    ]
-  ];
+    )
+  );
 });
 
 // 当 pattern 为正则表达式时，matchs 会作为函数的参数传入
@@ -85,10 +85,10 @@ $webot->rules->loadJson('rules.json');
 $webot->rules->loadYaml('rules.yml');
 
 // 同时加载多个文件
-$webot->rules->loadJson([
+$webot->rules->loadJson(array(
   'rules1.json',
   'rules2.json',
-]);
+));
 
 // glob 表达式
 $webot->rules->loadYaml('rules/yaml/*.yml');
@@ -98,18 +98,18 @@ rules.php
 ```php
 <?php
 
-return [
+return array(
   'pattern' => 'h1',
-  'test' => [
-    'news' => [
+  'test' => array(
+    'news' => array(
       'title' => 'hello',
       'content' => 'world',
-    ],
-  ],
+    ),
+  ),
   'p(.*)3' => function () {
     return 'hello';
   }
-];
+);
 ```
 
 rules.json
@@ -137,18 +137,18 @@ y3:
 ----------
 菜单事件的处理方式与文本规则一样，只不过 `$pattern` 为定值的 `EventKey`，并且与 `$rules` 区分使用 `$menus`
 ```php
-$webot->$menus->add('新闻', ['news' => [
-  [
+$webot->$menus->add('新闻', array('news' => array(
+  array(
     'title' => '标题1',
     'picture' => 'http://example.com/1.jpg',
     'url' => 'http://example.com/news/1',
-  ],
-  [
+  ),
+  array(
     'title' => '标题2',
     'picture' => 'http://example.com/2.jpg',
     'url' => 'http://example.com/news/2',
-  ],
-]])
+  ),
+)));
 
 $webot->$menus->loadPhp('menus.php');
 ```

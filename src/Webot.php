@@ -38,10 +38,10 @@ class Webot {
     $this->menus = new Webot\Rules;
     $this->wechat = new Wechat($token);
     $this->handler = new Webot\Handler($this->wechat);
-    $this->hook = new Webot\Hooks([
+    $this->hook = new Webot\Hooks(array(
       'request' => $this->wechat->request,
       'response' => $this->wechat->response,
-    ]);
+    ));
     $this->hook->dispatch('init');
   }
 
@@ -55,20 +55,20 @@ class Webot {
 
     switch ($this->wechat->request->msgtype) {
       case 'text':
-        $this->hook->dispatch('text.before', [
+        $this->hook->dispatch('text.before', array(
           'content' => $this->wechat->request->content,
-        ]);
+        ));
         $this->handler->matchs($this->rules);
-        $this->hook->dispatch('text', [
+        $this->hook->dispatch('text', array(
           'content' => $this->wechat->request->content,
-        ]);
+        ));
         break;
 
       case 'image':
-        $this->hook->dispatch('image', [
+        $this->hook->dispatch('image', array(
           'picture' => $this->wechat->request->picurl,
           'mediaId' => $this->wechat->request->mediaId,
-        ]);
+        ));
         break;
 
       case 'link':
@@ -76,37 +76,37 @@ class Webot {
         break;
 
       case 'location':
-        $this->hook->dispatch('location', [
+        $this->hook->dispatch('location', array(
           'scale' => $this->wechat->request->scale,
           'label' => $this->wechat->request->label,
-          'location' => [
+          'location' => array(
             'x' => $this->wechat->request->location_x,
             'y' => $this->wechat->request->location_y,
-          ],
-        ]);
+          ),
+        ));
         break;
 
       case 'video':
-        $this->hook->dispatch('video', [
+        $this->hook->dispatch('video', array(
           'mediaId' => $this->wechat->request->mediaId,
           'thumbMediaId' => $this->wechat->request->thumbMediaId,
-        ]);
+        ));
         break;
 
       case 'voice':
-        $this->hook->dispatch('voice', [
+        $this->hook->dispatch('voice', array(
           'format' => $this->wechat->request->format,
           'mediaId' => $this->wechat->request->mediaId,
           'recognition' => $this->wechat->request->recognition,
-        ]);
+        ));
         break;
 
       case 'event':
         switch ($this->wechat->request->event) {
           case 'subscribe':
-            $this->hook->dispatch('event.subscribe', [
+            $this->hook->dispatch('event.subscribe', array(
               'eventKey' => $this->wechat->request->eventKey,
-            ]);
+            ));
             break;
 
           case 'unsubscribe':
@@ -114,26 +114,26 @@ class Webot {
             break;
 
           case 'SCAN':
-            $this->hook->dispatch('event.scan', [
+            $this->hook->dispatch('event.scan', array(
               'eventKey' => $this->wechat->request->eventKey,
               'ticket' => $this->wechat->request->ticket,
-            ]);
+            ));
             break;
 
           case 'CLICK':
-            $this->hook->dispatch('event.click.before', [
+            $this->hook->dispatch('event.click.before', array(
               'eventKey' => $this->wechat->request->eventKey,
-            ]);
+            ));
             $this->handler->equals($this->menus);
-            $this->hook->dispatch('event.click', [
+            $this->hook->dispatch('event.click', array(
               'eventKey' => $this->wechat->request->eventKey,
-            ]);
+            ));
             break;
 
           case 'VIEW':
-            $this->hook->dispatch('event.view', [
+            $this->hook->dispatch('event.view', array(
               'eventKey' => $this->wechat->request->eventKey,
-            ]);
+            ));
             $this->handler->equals($this->menus);
             break;
 
@@ -146,9 +146,9 @@ class Webot {
         $this->hook->dispatch('unknown.message');
     }
 
-    $this->hook->dispatch('end', [
+    $this->hook->dispatch('end', array(
       'handled' => $this->wechat->response->responded(),
-    ]);
+    ));
   }
 
   /**

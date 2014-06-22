@@ -30,7 +30,7 @@ class Hooks {
    * @param string $hook
    * @param array $params
    */
-  public function dispatch($hook, $params=[]) {
+  public function dispatch($hook, $params=array()) {
     if (isset($this->hooks[$hook])) {
       foreach ($this->hooks[$hook] as $callback) {
         $callback((object)array_merge($this->depends, $params));
